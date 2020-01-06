@@ -185,8 +185,10 @@
                     }
                 });
             },
+
+            //登录
             login(){
-                if(!this.userName || !this.userPwd){
+                if(!this.userName || !this.userPwd){//如果没有输入用户名或者密码
                   this.errorTip = true;
                   return;
                 }
@@ -205,11 +207,13 @@
                     }
                 });
             },
+
+            //登出
             logOut(){
                 axios.post("/users/logout").then((response)=>{
                     let res = response.data;
-                    if(res.status=="0"){
-//                        this.nickName = '';
+                    if(res.status=="0"){//登出成功，把昵称改为“”
+                        // this.nickName = '';
                         this.$store.commit("updateUserInfo",res.result.userName);
                     }
                 })

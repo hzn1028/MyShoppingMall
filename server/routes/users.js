@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 require('./../util/util')
-var User = require('./../models/user');
+var User = require('./../models/user');//获取user模型
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -12,10 +12,11 @@ router.get('/test', function(req, res, next) {
   res.send('test');
 });
 
+// 登录login接口
 router.post("/login", function (req,res,next) {
   var param = {
-      userName:req.body.userName,
-      userPwd:req.body.userPwd
+      userName:req.body.userName,//拿到前端传过来的用户名
+      userPwd:req.body.userPwd//拿到前端传过来的密码
   }
   User.findOne(param, function (err,doc) {
       if(err){
@@ -25,20 +26,25 @@ router.post("/login", function (req,res,next) {
           });
       }else{
           if(doc){
+              //把数据存储到cookie中
               res.cookie("userId",doc.userId,{
                   path:'/',
                   maxAge:1000*60*60
               });
               res.cookie("userName",doc.userName,{
-                path:'/',
-                maxAge:1000*60*60
+                  path:'/',
+                  maxAge:1000*60*60
               });
+
+              //把数据存储到session中
               //req.session.user = doc;
+
+              //返回给前端的数据
               res.json({
                   status:'0',
                   msg:'',
                   result:{
-                      userName:doc.userName
+                      userName:doc.userName//登录成功返回用户名
                   }
               });
           }
@@ -49,10 +55,13 @@ router.post("/login", function (req,res,next) {
 
 //登出接口
 router.post("/logout", function (req,res,next) {
+  //清掉cookie
   res.cookie("userId","",{
     path:"/",
     maxAge:-1
   });
+
+  //返回给前端的数据
   res.json({
     status:"0",
     msg:'',
