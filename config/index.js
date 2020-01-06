@@ -27,7 +27,7 @@ module.exports = {
     autoOpenBrowser: true,
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {
+    proxyTable: {//配置代理
       '/goods':{
           target:'http://localhost:3000'
       },

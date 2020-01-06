@@ -122,17 +122,17 @@ router.get("/getCartCount", function (req,res,next) {
 
 //查询当前用户的购物车数据
 router.get("/cartList", function (req,res,next) {
-  var userId = req.cookies.userId;
-  User.findOne({userId:userId}, function (err,doc) {
-      if(err){
-        res.json({
+  var userId = req.cookies.userId;//先拿到用户id
+  User.findOne({userId:userId}, function (err,doc) {//获取该用户的购物车数据
+      if(err){//如果报错
+        res.json({//返回给前端的数据
           status:'1',
           msg:err.message,
           result:''
         });
-      }else{
+      }else{//如果获取成功
           if(doc){
-            res.json({
+            res.json({//返回给前端的数据
               status:'0',
               msg:'',
               result:doc.cartList

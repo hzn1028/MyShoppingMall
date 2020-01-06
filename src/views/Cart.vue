@@ -185,9 +185,11 @@
           currency:currency
         },
         computed:{
+
           checkAllFlag(){
             return this.checkedCount == this.cartList.length;
           },
+
           checkedCount(){
             var i = 0;
             this.cartList.forEach((item)=>{
@@ -195,6 +197,7 @@
             })
             return i;
           },
+
           totalPrice(){
             var money = 0;
             this.cartList.forEach((item)=>{
@@ -212,12 +215,15 @@
           Modal
         },
         methods:{
+            //获取购物车的商品列表数据
             init(){
               axios.get("/users/cartList").then((response)=>{
                   let res = response.data;
                   this.cartList = res.result;
               });
             },
+
+            //关闭模态框
             closeModal(){
               this.modalConfirm = false;
             },
