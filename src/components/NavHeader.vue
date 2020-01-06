@@ -166,19 +166,20 @@
         cartCount(){
           return this.$store.state.cartCount;
         }*/
-        mounted(){
-            this.checkLogin();
+        mounted(){//刷新时通过cookie来检查用户是否已经登录
+            this.checkLogin();//检查用户有没有登录
         },
         methods:{
+            //检查用户有没有登录
             checkLogin(){
                 axios.get("/users/checkLogin").then((response)=>{
                     var res = response.data;
                     var path = this.$route.pathname;
-                    if(res.status=="0"){
-//                      this.nickName = res.result;
+                    if(res.status=="0"){//用户已登录
+                      //this.nickName = res.result;
                       this.$store.commit("updateUserInfo",res.result);
                       this.loginModalFlag = false;
-                    }else{
+                    }else{//用户未登录
                       if(this.$route.path!="/goods"){
                         this.$router.push("/goods");
                       }
@@ -218,6 +219,8 @@
                     }
                 })
             },
+
+
             getCartCount(){
               axios.get("users/getCartCount").then(res=>{
                 var res = res.data;

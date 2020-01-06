@@ -24,14 +24,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// 实现登录拦截
 app.use(function (req,res,next) {
-  if(req.cookies.userId){
+  if(req.cookies.userId){//如果用户已登录，则不拦截任何请求
     next();
-  }else{
+  }else{//如果用户未登录，则拦截一些不合理的请求（如加入购物车）
       console.log("url:"+req.originalUrl);
       if(req.originalUrl=='/users/login' || req.originalUrl=='/users/logout' || req.originalUrl.indexOf('/goods/list')>-1){
-          next();
-      }else{
+          next();//不拦截登录、登出、获取商品列表请求
+      }else{//除了登录、登出、获取商品列表请求以外的请求都拦截
           res.json({
             status:'10001',
             msg:'当前未登录',

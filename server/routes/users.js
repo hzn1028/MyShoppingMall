@@ -53,15 +53,15 @@ router.post("/login", function (req,res,next) {
 });
 
 
-//登出接口
+// 登出接口
 router.post("/logout", function (req,res,next) {
-  //清掉cookie
+  // 清掉cookie
   res.cookie("userId","",{
     path:"/",
     maxAge:-1
   });
 
-  //返回给前端的数据
+  // 返回给前端的数据
   res.json({
     status:"0",
     msg:'',
@@ -69,9 +69,11 @@ router.post("/logout", function (req,res,next) {
   })
 });
 
+// 检查是否登录-----刷新时通过cookie来检查用户是否已经登录
 router.get("/checkLogin", function (req,res,next) {
-  if(req.cookies.userId){
-      res.json({
+  //通过查看cookie中有没有这个userId来检查是否登录
+  if(req.cookies.userId){//如果有，说明已经登录
+      res.json({//返回给前端的
         status:'0',
         msg:'',
         result:req.cookies.userName || ''
@@ -84,6 +86,8 @@ router.get("/checkLogin", function (req,res,next) {
     });
   }
 });
+
+//
 router.get("/getCartCount", function (req,res,next) {
   if(req.cookies && req.cookies.userId){
     console.log("userId:"+req.cookies.userId);
@@ -114,6 +118,8 @@ router.get("/getCartCount", function (req,res,next) {
     });
   }
 });
+
+
 //查询当前用户的购物车数据
 router.get("/cartList", function (req,res,next) {
   var userId = req.cookies.userId;
@@ -189,6 +195,8 @@ router.post("/cartEdit", function (req,res,next) {
     }
   })
 });
+
+
 router.post("/editCheckAll", function (req,res,next) {
   var userId = req.cookies.userId,
       checkAll = req.body.checkAll?'1':'0';
@@ -223,6 +231,8 @@ router.post("/editCheckAll", function (req,res,next) {
     }
   });
 });
+
+
 //查询用户地址接口
 router.get("/addressList", function (req,res,next) {
   var userId = req.cookies.userId;
@@ -242,6 +252,8 @@ router.get("/addressList", function (req,res,next) {
     }
   })
 });
+
+
 //设置默认地址接口
 router.post("/setDefault", function (req,res,next) {
   var userId = req.cookies.userId,
@@ -383,6 +395,8 @@ router.post("/payMent", function (req,res,next) {
      }
   })
 });
+
+
 //根据订单Id查询订单信息
 router.get("/orderDetail", function (req,res,next) {
   var userId = req.cookies.userId,orderId = req.param("orderId");
@@ -428,4 +442,6 @@ router.get("/orderDetail", function (req,res,next) {
       }
   })
 });
+
+
 module.exports = router;
