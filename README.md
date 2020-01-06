@@ -1,6 +1,6 @@
-# shoppingmall
+# MyShoppingMall
 
-> shoppingMall 
+> MyShoppingMall
 
 ## Build Setup
 
