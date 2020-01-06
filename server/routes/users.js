@@ -87,7 +87,7 @@ router.get("/checkLogin", function (req,res,next) {
   }
 });
 
-//
+//获取某用户购物车里商品数量
 router.get("/getCartCount", function (req,res,next) {
   if(req.cookies && req.cookies.userId){
     console.log("userId:"+req.cookies.userId);

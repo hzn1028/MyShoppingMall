@@ -23,14 +23,14 @@
 </style>
 <script>
     export default{
-        props:["mdShow"],
+        props:["mdShow"],//父组件传给子组件的值，通过props来接收父组件传过来的值
         data(){
             return{
                 msg:'hello vue'
             }
         },
         methods:{
-          closeModal(){
+          closeModal(){//触发父组件关闭模态框
             this.$emit("close");
           }
         }

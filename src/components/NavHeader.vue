@@ -166,11 +166,11 @@
         cartCount(){
           return this.$store.state.cartCount;
         }*/
-        mounted(){//刷新时通过cookie来检查用户是否已经登录
+        mounted(){//刷新时检查用户是否已经登录
             this.checkLogin();//检查用户有没有登录
         },
         methods:{
-            //检查用户有没有登录
+            //检查用户有没有登录----刷新时检查用户是否已经登录
             checkLogin(){
                 axios.get("/users/checkLogin").then((response)=>{
                     var res = response.data;
@@ -216,11 +216,12 @@
                     if(res.status=="0"){//登出成功，把昵称改为“”
                         // this.nickName = '';
                         this.$store.commit("updateUserInfo",res.result.userName);
+                        //this.$store.commit("updateCartCount",0);
                     }
                 })
             },
 
-
+            //获取某用户购物车里商品的数量
             getCartCount(){
               axios.get("users/getCartCount").then(res=>{
                 var res = res.data;
