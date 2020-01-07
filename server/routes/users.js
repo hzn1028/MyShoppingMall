@@ -264,14 +264,14 @@ router.get("/addressList", function (req,res,next) {
 router.post("/setDefault", function (req,res,next) {
   var userId = req.cookies.userId,
       addressId = req.body.addressId;
-  if(!addressId){
+  if(!addressId){//如果没有地址id，则告知前端
     res.json({
       status:'1003',
       msg:'addressId is null',
       result:''
     });
   }else{
-    User.findOne({userId:userId}, function (err,doc) {
+    User.findOne({userId:userId}, function (err,doc) {//先找到用户
       if(err){
         res.json({
           status:'1',
@@ -279,11 +279,11 @@ router.post("/setDefault", function (req,res,next) {
           result:''
         });
       }else{
-        var addressList = doc.addressList;
-        addressList.forEach((item)=>{
-          if(item.addressId ==addressId){
+        var addressList = doc.addressList;//找到用户的地址列表
+        addressList.forEach((item)=>{//遍历用户的地址列表，找到地址
+          if(item.addressId ==addressId){//设置默认地址
              item.isDefault = true;
-          }else{
+          }else{//其他改为非默认地址
             item.isDefault = false;
           }
         });

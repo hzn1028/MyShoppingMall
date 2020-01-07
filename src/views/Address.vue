@@ -176,13 +176,17 @@
                   this.selectedAddrId = this.addressList[0].addressId;
               });
           },
-          expand(){//展开/收齐地址列表
+
+          //展开/收齐地址列表
+          expand(){
               if(this.limit==3){//展开
                 this.limit = this.addressList.length;
               }else{//收起
                 this.limit = 3;
               }
           },
+
+          //设置默认地址
           setDefault(addressId){
               axios.post("/users/setDefault",{
                 addressId:addressId
@@ -194,13 +198,19 @@
                   }
               })
           },
+
+          //关闭模态框
           closeModal(){
               this.isMdShow = false;
           },
+
+          //点击删除某个地址----弹出模态框
           delAddressConfirm(addressId){
             this.isMdShow = true;
             this.addressId = addressId;
           },
+
+          //确认---删除某个地址
           delAddress(){
             axios.post("/users/delAddress",{
               addressId:this.addressId
@@ -209,7 +219,7 @@
                 if(res.status=="0"){
                   console.log("del suc");
                   this.isMdShow = false;
-                  this.init();
+                  this.init();//设置为默认地址后，重新获取地址列表
                 }
             })
           }
