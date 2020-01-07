@@ -122,7 +122,7 @@
                                                         <!--金额过滤器-->
                 Item total: <span class="total-price">{{totalPrice|currency('$')}}</span>
               </div>
-              <div class="btn-wrap">
+              <div class="btn-wrap">                   <!--选中商品数量为0，禁用-->
                 <a class="btn btn--red" v-bind:class="{'btn--dis':checkedCount==0}" @click="checkOut">Checkout</a>
               </div>
             </div>
@@ -296,10 +296,10 @@
                 })
             },
 
-            //将金额格式化
+            //结算----跳转到地址列表页面
             checkOut(){
                 if(this.checkedCount>0){
-                    this.$router.push({
+                    this.$router.push({//跳转到地址列表页面
                         path:"/address"
                     });
                 }

@@ -168,6 +168,7 @@
         Modal
       },
       methods:{
+          //获取用户的地址列表
           init(){
               axios.get("/users/addressList").then((response)=>{
                   let res = response.data;
