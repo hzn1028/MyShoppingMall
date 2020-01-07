@@ -146,8 +146,8 @@
       data(){
           return{
               limit:3,
-              checkIndex:0,
-              selectedAddrId:'',
+              checkIndex:0,//选中地址的下标，默认是0
+              selectedAddrId:'',//选中地址的id
               addressList:[],
               isMdShow:false,
               addressId:''
@@ -156,8 +156,8 @@
       mounted(){
           this.init();
       },
-      computed:{
-        addressListFilter(){
+      computed:{//计算属性
+        addressListFilter(){//过滤：默认只显示地址列表的前三条
           return this.addressList.slice(0,this.limit);
         }
       },
@@ -176,10 +176,10 @@
                   this.selectedAddrId = this.addressList[0].addressId;
               });
           },
-          expand(){
-              if(this.limit==3){
+          expand(){//展开/收齐地址列表
+              if(this.limit==3){//展开
                 this.limit = this.addressList.length;
-              }else{
+              }else{//收起
                 this.limit = 3;
               }
           },
