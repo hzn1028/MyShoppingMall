@@ -142,25 +142,26 @@ router.get("/cartList", function (req,res,next) {
   });
 });
 
-//购物车删除
+//购物车删除某个商品
 router.post("/cartDel", function (req,res,next) {
   var userId = req.cookies.userId,productId = req.body.productId;
+  //通过update删除数据
   User.update({
-    userId:userId
+    userId:userId//条件
   },{
-    $pull:{
+    $pull:{//删除cartList下productId为productId的元素
       'cartList':{
         'productId':productId
       }
     }
   }, function (err,doc) {
-    if(err){
+    if(err){//如果删除失败返回给前端的信息
       res.json({
         status:'1',
         msg:err.message,
         result:''
       });
-    }else{
+    }else{//如果删除成功返回给前端的信息
       res.json({
         status:'0',
         msg:'',

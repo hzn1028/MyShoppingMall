@@ -227,23 +227,29 @@
             closeModal(){
               this.modalConfirm = false;
             },
+
+            //点击删除---弹出模态框
             delCartConfirm(item){
-                this.delItem = item;
-                this.modalConfirm = true;
+                this.delItem = item;//保存要删除商品的信息
+                this.modalConfirm = true;//弹出模态框
             },
+
+            //点击确认时触发删除
             delCart(){
               axios.post("/users/cartDel",{
                 productId:this.delItem.productId
               }).then((response)=>{
                   let res = response.data;
-                  if(res.status == '0'){
-                    this.modalConfirm = false;
+                  if(res.status == '0'){//如果删除成功
+                    this.modalConfirm = false;//关闭模态框
                     var delCount = this.delItem.productNum;
                     this.$store.commit("updateCartCount",-delCount);
-                    this.init();
+                    this.init();//重新获取购物车里的商品列表
                   }
               });
             },
+
+
             editCart(flag,item){
                 if(flag=='add'){
                   item.productNum++;
@@ -267,6 +273,8 @@
                     }
                 })
             },
+
+
             toggleCheckAll(){
                 var flag = !this.checkAllFlag;
                 this.cartList.forEach((item)=>{
@@ -281,6 +289,8 @@
                     }
                 })
             },
+
+
             checkOut(){
                 if(this.checkedCount>0){
                     this.$router.push({
