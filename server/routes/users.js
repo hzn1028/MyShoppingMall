@@ -171,23 +171,24 @@ router.post("/cartDel", function (req,res,next) {
   });
 });
 
-//修改商品数量
+//修改商品数量以及商品是否选中
 router.post("/cartEdit", function (req,res,next) {
   var userId = req.cookies.userId,
       productId = req.body.productId,
       productNum = req.body.productNum,
       checked = req.body.checked;
-  User.update({"userId":userId,"cartList.productId":productId},{
-    "cartList.$.productNum":productNum,
-    "cartList.$.checked":checked,
+  User.update({"userId":userId,"cartList.productId":productId},{//更新条件
+    //更新子文档的方法：cartList.$.productNum、cartList.$.checked
+    "cartList.$.productNum":productNum,//更新商品数量
+    "cartList.$.checked":checked,//更新商品是否选中
   }, function (err,doc) {
-    if(err){
+    if(err){//更新失败
       res.json({
         status:'1',
         msg:err.message,
         result:''
       });
-    }else{
+    }else{//更新成功
       res.json({
         status:'0',
         msg:'',

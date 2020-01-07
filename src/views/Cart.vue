@@ -249,23 +249,24 @@
               });
             },
 
-
+            //购物车编辑功能（商品数量的加减）
             editCart(flag,item){
-                if(flag=='add'){
+                if(flag=='add'){//商品数量+1
                   item.productNum++;
-                }else if(flag=='minu'){
-                  if(item.productNum<=1){
+                }else if(flag=='minu'){//商品数量-1
+                  if(item.productNum<=1){//如果商品数量为1，则不能再-了
                     return;
                   }
                   item.productNum--;
                 }else{
-                  item.checked = item.checked=="1"?'0':'1';
+                  item.checked = item.checked=="1"?'0':'1';//选中状态取反
                 }
 
+                //调用接口告诉后台商品数量的变化、商品是否选中（这样刷新页面才是我们改变后的数量、选中与否）
                 axios.post("/users/cartEdit",{
-                  productId:item.productId,
-                  productNum:item.productNum,
-                  checked:item.checked
+                  productId:item.productId,//商品id
+                  productNum:item.productNum,//商品数量
+                  checked:item.checked//商品选中与否
                 }).then((response)=>{
                     let res = response.data;
                     if(res.status=="0"){
