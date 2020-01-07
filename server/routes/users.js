@@ -314,7 +314,7 @@ router.post("/delAddress", function (req,res,next) {
   User.update({
     userId:userId
   },{
-    $pull:{
+    $pull:{//删除
       'addressList':{
         'addressId':addressId
       }

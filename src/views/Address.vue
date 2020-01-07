@@ -150,7 +150,7 @@
               selectedAddrId:'',//选中地址的id
               addressList:[],
               isMdShow:false,
-              addressId:''
+              addressId:''//要删除地址的id
           }
       },
       mounted(){
@@ -206,8 +206,8 @@
 
           //点击删除某个地址----弹出模态框
           delAddressConfirm(addressId){
-            this.isMdShow = true;
-            this.addressId = addressId;
+            this.isMdShow = true;//弹出模态框
+            this.addressId = addressId;//将要删除地址的id存储起来
           },
 
           //确认---删除某个地址
