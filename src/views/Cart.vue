@@ -119,6 +119,7 @@
             </div>
             <div class="cart-foot-r">
               <div class="item-total">
+                                                        <!--金额过滤器-->
                 Item total: <span class="total-price">{{totalPrice|currency('$')}}</span>
               </div>
               <div class="btn-wrap">
@@ -168,7 +169,7 @@
     import NavFooter from './../components/NavFooter'
     import NavBread from './../components/NavBread'
     import Modal from './../components/Modal'
-    import {currency} from './../util/currency'
+    import {currency} from './../util/currency' //金额的格式化
     import axios from 'axios'
     export default{
         data(){
@@ -181,15 +182,16 @@
         mounted(){
             this.init();
         },
-        filters:{
-          currency:currency
+        filters:{//过滤器
+          currency:currency//将金额格式化
         },
-        computed:{
-
+        computed:{//计算属性（相关属性发生变化，则进行实时计算）
+          //判断商品是否全选中-----控制checkAllFlag属性的变化
           checkAllFlag(){
             return this.checkedCount == this.cartList.length;
           },
 
+          //计算商品选中数量----控制checkedCount属性的变化
           checkedCount(){
             var i = 0;
             this.cartList.forEach((item)=>{
@@ -198,6 +200,7 @@
             return i;
           },
 
+          //计算已选中商品的总价----控制totalPrice属性的变化
           totalPrice(){
             var money = 0;
             this.cartList.forEach((item)=>{
@@ -275,23 +278,25 @@
                 })
             },
 
-
+            //购物车商品全选/全不选
             toggleCheckAll(){
-                var flag = !this.checkAllFlag;
-                this.cartList.forEach((item)=>{
+                var flag = !this.checkAllFlag;//全选与全不选取反
+                this.cartList.forEach((item)=>{//改变每一种商品的选中与否
                   item.checked = flag?'1':'0';
                 })
+
+                //调用后台接口记录商品的选中与否
                 axios.post("/users/editCheckAll",{
                   checkAll:flag
                 }).then((response)=>{
                     let res = response.data;
-                    if(res.status=='0'){
+                    if(res.status=='0'){//更新成功
                         console.log("update suc");
                     }
                 })
             },
 
-
+            //将金额格式化
             checkOut(){
                 if(this.checkedCount>0){
                     this.$router.push({

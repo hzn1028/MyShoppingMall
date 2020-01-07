@@ -4,6 +4,7 @@
     <list default="true" id="70e02ca3-7ba1-41d6-8e40-3947d014c3f1" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/routes/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/users.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/Cart.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Cart.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -145,7 +146,7 @@
       <updated>1494739158304</updated>
       <workItem from="1578297278995" duration="844000" />
       <workItem from="1578313955879" duration="8870000" />
-      <workItem from="1578365295373" duration="3105000" />
+      <workItem from="1578365295373" duration="5083000" />
     </task>
     <servers />
   </component>
@@ -165,10 +166,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="137" y="22" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1578381272906" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1578320780744">
+    <state x="330" y="0" key="CommitChangelistDialog2" timestamp="1578385038092">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1578320780744" />
+    <state x="330" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1578385038092" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1578383831366">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1578383831366" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

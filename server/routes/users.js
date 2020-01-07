@@ -144,7 +144,9 @@ router.get("/cartList", function (req,res,next) {
 
 //购物车删除某个商品
 router.post("/cartDel", function (req,res,next) {
+  //通过cookie来拿用户id，通过前端的传参来拿商品id
   var userId = req.cookies.userId,productId = req.body.productId;
+
   //通过update删除数据
   User.update({
     userId:userId//条件
@@ -173,6 +175,7 @@ router.post("/cartDel", function (req,res,next) {
 
 //修改商品数量以及商品是否选中
 router.post("/cartEdit", function (req,res,next) {
+  //通过cookie来拿用户id，通过前端的传参来拿商品id，商品数量，商品选中与否
   var userId = req.cookies.userId,
       productId = req.body.productId,
       productNum = req.body.productNum,
@@ -198,11 +201,12 @@ router.post("/cartEdit", function (req,res,next) {
   })
 });
 
-
+//购物车全选/全不选接口
 router.post("/editCheckAll", function (req,res,next) {
+  //通过cookie来拿用户id，通过前端的传参来拿商品全选与否
   var userId = req.cookies.userId,
       checkAll = req.body.checkAll?'1':'0';
-  User.findOne({userId:userId}, function (err,user) {
+  User.findOne({userId:userId}, function (err,user) {//先找到用户
     if(err){
       res.json({
         status:'1',
@@ -211,10 +215,10 @@ router.post("/editCheckAll", function (req,res,next) {
       });
     }else{
       if(user){
-        user.cartList.forEach((item)=>{
+        user.cartList.forEach((item)=>{//更新每一件商品的选中与否
           item.checked = checkAll;
         })
-        user.save(function (err1,doc) {
+        user.save(function (err1,doc) {//将更改后的保存起来
             if(err1){
               res.json({
                 status:'1',

@@ -20,6 +20,7 @@ Vue.use(VueLazyload, {
   try: 3 // default 1
 })
 
+//全局过滤器
 Vue.filter("currency",currency);
 Vue.config.productionTip = false;
 
