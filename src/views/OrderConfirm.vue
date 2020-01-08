@@ -136,11 +136,11 @@
   export default{
       data(){
           return{
-              shipping:100,
-              discount:200,
-              tax:400,
-              subTotal:0,
-              orderTotal:0,
+              shipping:100,//配送费
+              discount:200,//折扣
+              tax:400,//扣税
+              subTotal:0,//商品总金额
+              orderTotal:0,//订单总金额（算了配送费等)
               cartList:[]
           }
       },
@@ -157,17 +157,18 @@
       },
       methods:{
          init(){
+            //获取购物车数据
             axios.get("/users/cartList").then((response)=>{
                 let res = response.data;
                 this.cartList = res.result;
 
-                this.cartList.forEach((item)=>{
+                this.cartList.forEach((item)=>{//遍历购物车，拿到选中的商品
                     if(item.checked=='1'){
-                        this.subTotal += item.salePrice*item.productNum;
+                        this.subTotal += item.salePrice*item.productNum;//计算商品总金额
                     }
                 });
 
-                this.orderTotal = this.subTotal+this.shipping-this.discount+this.tax;
+                this.orderTotal = this.subTotal+this.shipping-this.discount+this.tax;//计算订单总金额
             });
          },
           payMent(){
