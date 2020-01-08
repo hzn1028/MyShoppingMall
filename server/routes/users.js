@@ -424,11 +424,11 @@ router.get("/orderDetail", function (req,res,next) {
          if(orderList.length>0){
            var orderTotal = 0;
            orderList.forEach((item)=>{
-              if(item.orderId == orderId){
-                orderTotal = item.orderTotal;
+              if(item.orderId == orderId){//找到该订单
+                orderTotal = item.orderTotal;//计算订单总金额
               }
            });
-           if(orderTotal>0){
+           if(orderTotal>0){//如果订单总金额大于0
              res.json({
                status:'0',
                msg:'',
@@ -437,7 +437,7 @@ router.get("/orderDetail", function (req,res,next) {
                  orderTotal:orderTotal
                }
              })
-           }else{
+           }else{//如果订单总金额<=0
              res.json({
                status:'120002',
                msg:'无此订单',

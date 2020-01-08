@@ -59,6 +59,7 @@
           currency:currency
         },
         mounted(){
+            //查询订单详情
             var orderId = this.$route.query.orderId;
             console.log("orderId:"+orderId);
             if(!orderId){
@@ -71,8 +72,8 @@
             }).then((response)=>{
                 let res = response.data;
                 if(res.status=='0'){
-                    this.orderId = orderId;
-                    this.orderTotal = res.result.orderTotal;
+                    this.orderId = orderId;//订单id
+                    this.orderTotal = res.result.orderTotal;//订单总金额
                 }
             });
         }
