@@ -336,10 +336,12 @@ router.post("/delAddress", function (req,res,next) {
   });
 });
 
+
+//创建订单
 router.post("/payMent", function (req,res,next) {
-  var userId = req.cookies.userId,
-    addressId = req.body.addressId,
-    orderTotal = req.body.orderTotal;
+  var userId = req.cookies.userId,//用户id
+    addressId = req.body.addressId,//用户地址id
+    orderTotal = req.body.orderTotal;//用户订单总金额
   User.findOne({userId:userId}, function (err,doc) {
      if(err){
         res.json({
@@ -349,16 +351,18 @@ router.post("/payMent", function (req,res,next) {
         });
      }else{
        var address = '',goodsList = [];
+
        //获取当前用户的地址信息
        doc.addressList.forEach((item)=>{
           if(addressId==item.addressId){
-            address = item;
+            address = item;//记录用户选中的地址
           }
        })
+
        //获取用户购物车的购买商品
        doc.cartList.filter((item)=>{
          if(item.checked=='1'){
-           goodsList.push(item);
+           goodsList.push(item);//记录用户选中的商品
          }
        });
 
@@ -366,9 +370,10 @@ router.post("/payMent", function (req,res,next) {
        var r1 = Math.floor(Math.random()*10);
        var r2 = Math.floor(Math.random()*10);
 
+       //生成订单信息
        var sysDate = new Date().Format('yyyyMMddhhmmss');
        var createDate = new Date().Format('yyyy-MM-dd hh:mm:ss');
-       var orderId = platform+r1+sysDate+r2;
+       var orderId = platform+r1+sysDate+r2;//订单id
        var order = {
           orderId:orderId,
           orderTotal:orderTotal,
@@ -380,6 +385,7 @@ router.post("/payMent", function (req,res,next) {
 
        doc.orderList.push(order);
 
+       //将订单信息保存到数据库
        doc.save(function (err1,doc1) {
           if(err1){
             res.json({

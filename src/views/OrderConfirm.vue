@@ -171,6 +171,8 @@
                 this.orderTotal = this.subTotal+this.shipping-this.discount+this.tax;//计算订单总金额
             });
          },
+
+          //创建订单
           payMent(){
               var addressId = this.$route.query.addressId;
               axios.post("/users/payMent",{
@@ -178,7 +180,7 @@
                 orderTotal:this.orderTotal
               }).then((response)=>{
                   let res = response.data;
-                  if(res.status=="0"){
+                  if(res.status=="0"){//订单生成成功--->跳转页面
                       this.$router.push({
                           path:'/orderSuccess?orderId='+res.result.orderId
                       })
