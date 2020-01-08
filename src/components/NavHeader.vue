@@ -154,18 +154,21 @@
               userName:'admin',
               userPwd:'123456',
               errorTip:false,
-              loginModalFlag:false
+              loginModalFlag:false,
+              cartNum:0,
             }
         },
         computed:{
           ...mapState(['nickName','cartCount'])
+          /*上面这句话相当于下面*/
+          /*nickName(){
+            return this.$store.state.nickName;
+          },
+          cartCount(){
+            return this.$store.state.cartCount;
+          }*/
         },
-        /*nickName(){
-          return this.$store.state.nickName;
-        },
-        cartCount(){
-          return this.$store.state.cartCount;
-        }*/
+
         mounted(){//刷新时检查用户是否已经登录
             this.checkLogin();//检查用户有没有登录
         },
@@ -216,7 +219,8 @@
                     if(res.status=="0"){//登出成功，把昵称改为“”
                         // this.nickName = '';
                         this.$store.commit("updateUserInfo",res.result.userName);
-                        //this.$store.commit("updateCartCount",0);
+                        console.log(-this.cartNum);
+                        this.$store.commit("updateCartCount",-this.cartNum);
                     }
                 })
             },
@@ -225,6 +229,8 @@
             getCartCount(){
               axios.get("users/getCartCount").then(res=>{
                 var res = res.data;
+                this.cartNum = res.result;//记录购物车数量，方便登出时则把数量改为0
+                console.log(this.cartNum);
                 this.$store.commit("updateCartCount",res.result);
               });
             }

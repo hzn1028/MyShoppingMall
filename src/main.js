@@ -24,6 +24,8 @@ Vue.use(VueLazyload, {
 Vue.filter("currency",currency);
 Vue.config.productionTip = false;
 
+
+//定义一个store对象
 const store = new Vuex.Store({
   state: {
     nickName:'',
@@ -39,6 +41,8 @@ const store = new Vuex.Store({
     }
   }
 });
+
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
